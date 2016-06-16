@@ -188,7 +188,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 17 */
 /***/ function(module, exports) {
 
-	module.exports = "<div\n  mwl-droppable\n  on-drop=\"vm.handleEventDrop(dropData.event, day.date, dropData.draggedFromDate)\"\n  class=\"cal-month-day {{ day.cssClass }}\"\n  ng-class=\"{\n    'cal-day-outmonth': !day.inMonth,\n    'cal-day-inmonth': day.inMonth,\n    'cal-day-weekend': day.isWeekend,\n    'cal-day-past': day.isPast,\n    'cal-day-today': day.isToday,\n    'cal-day-future': day.isFuture\n  }\">\n\n  <small\n    class=\"cal-events-num badge badge-important pull-left\"\n    ng-show=\"day.badgeTotal > 0\"\n    ng-bind=\"day.badgeTotal\">\n  </small>\n\n  <span\n    class=\"pull-right\"\n    data-cal-date\n    ng-click=\"vm.calendarCtrl.dateClicked(day.date)\"\n    ng-bind=\"day.label\">\n  </span>\n\n  <div class=\"cal-day-tick\" ng-show=\"dayIndex === vm.openDayIndex && vm.view[vm.openDayIndex].events.length > 0 && !vm.slideBoxDisabled\">\n    <i class=\"glyphicon glyphicon-chevron-up\"></i>\n    <i class=\"fa fa-chevron-up\"></i>\n  </div>\n\n  <ng-include src=\"vm.calendarConfig.templates.calendarMonthCellEvents\"></ng-include>\n\n  <div id=\"cal-week-box\" ng-if=\"$first && rowHovered\">\n    <span ng-bind=\"vm.calendarConfig.i18nStrings.weekNumber.replace('{week}', day.date.clone().add(1, 'day').isoWeek())\"></span>\n  </div>\n\n</div>\n";
+	module.exports = "<div mwl-droppable on-drop=\"vm.handleEventDrop(dropData.event, day.date, dropData.draggedFromDate)\" class=\"cal-month-day {{ day.cssClass }}\" ng-class=\"{ 'cal-day-outmonth': !day.inMonth, 'cal-day-inmonth': day.inMonth, 'cal-day-weekend': day.isWeekend, 'cal-day-past': day.isPast, 'cal-day-today': day.isToday, 'cal-day-future': day.isFuture }\"> <small class=\"cal-events-num badge badge-important pull-left\" ng-show=\"day.badgeTotal > 0\" ng-bind=\"day.badgeTotal\"> </small> <span class=\"\" data-cal-date ng-click=\"vm.calendarCtrl.dateClicked(day.date)\" ng-bind=\"day.label\"> </span> <span class=\"date-availability\"> </span> <div class=\"cal-day-tick\" ng-show=\"dayIndex === vm.openDayIndex && vm.view[vm.openDayIndex].events.length > 0 && !vm.slideBoxDisabled\"> <i class=\"glyphicon glyphicon-chevron-up\"></i> <i class=\"fa fa-chevron-up\"></i> </div> <ng-include src=\"vm.calendarConfig.templates.calendarMonthCellEvents\"></ng-include> <div id=\"cal-week-box\" ng-if=\"$first && rowHovered\"> <span ng-bind=\"vm.calendarConfig.i18nStrings.weekNumber.replace('{week}', day.date.clone().add(1, 'day').isoWeek())\"></span> </div> </div> ";
 
 /***/ },
 /* 18 */
@@ -200,9 +200,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 19 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"cal-row-fluid cal-row-head\">\n\n  <div class=\"cal-cell1\" ng-repeat=\"day in vm.weekDays track by $index\" ng-bind=\"day\"></div>\n\n</div>\n<div class=\"cal-month-box\">\n\n  <div\n    ng-repeat=\"rowOffset in vm.monthOffsets track by rowOffset\"\n    ng-mouseenter=\"rowHovered = true\"\n    ng-mouseleave=\"rowHovered = false\">\n    <div class=\"cal-row-fluid cal-before-eventlist\">\n      <div\n        ng-repeat=\"day in vm.view | calendarLimitTo:7:rowOffset track by $index\"\n        ng-init=\"dayIndex = vm.view.indexOf(day)\"\n        class=\"cal-cell1 cal-cell {{ day.highlightClass }}\"\n        ng-click=\"vm.dayClicked(day, false, $event)\"\n        ng-class=\"{pointer: day.events.length > 0}\">\n        <ng-include src=\"vm.calendarConfig.templates.calendarMonthCell\"></ng-include>\n      </div>\n    </div>\n\n    <mwl-calendar-slide-box\n      is-open=\"vm.openRowIndex === $index && vm.view[vm.openDayIndex].events.length > 0 && !vm.slideBoxDisabled\"\n      events=\"vm.view[vm.openDayIndex].events\"\n      on-event-click=\"vm.onEventClick\"\n      edit-event-html=\"vm.editEventHtml\"\n      on-edit-event-click=\"vm.onEditEventClick\"\n      delete-event-html=\"vm.deleteEventHtml\"\n      on-delete-event-click=\"vm.onDeleteEventClick\">\n    </mwl-calendar-slide-box>\n\n  </div>\n\n</div>\n";
-
-/***/ },
+	module.exports = "<div class=\"cal-row-fluid cal-row-head\"> <div class=\"cal-cell1\" ng-repeat=\"day in vm.weekDays track by $index\" ng-bind=\"day\"></div> </div> <div class=\"cal-month-box\"> <div ng-repeat=\"rowOffset in vm.monthOffsets track by rowOffset\" ng-mouseenter=\"rowHovered = true\" ng-mouseleave=\"rowHovered = false\"> <div class=\"cal-row-fluid cal-before-eventlist\"> <div ng-repeat=\"day in vm.view | calendarLimitTo:7:rowOffset track by $index\" ng-init=\"dayIndex = vm.view.indexOf(day)\" class=\"cal-cell1 cal-cell {{ day.highlightClass }} pointer\" ng-click=\"vm.calendarCtrl.dateClicked(day.date)\" ng-disabled=\"vm.calendarCtrl.dateDisabled(day.date)\" ng-class=\"{'day-disabled': vm.calendarCtrl.dateDisabled(day.date), 'date-highlight':vm.calendarCtrl.isSameDate(day.date) }\"> <ng-include src=\"vm.calendarConfig.templates.calendarMonthCell\"></ng-include> </div> </div> <mwl-calendar-slide-box is-open=\"vm.openRowIndex === $index && vm.view[vm.openDayIndex].events.length > 0 && !vm.slideBoxDisabled\" events=\"vm.view[vm.openDayIndex].events\" on-event-click=\"vm.onEventClick\" edit-event-html=\"vm.editEventHtml\" on-edit-event-click=\"vm.onEditEventClick\" delete-event-html=\"vm.deleteEventHtml\" on-delete-event-click=\"vm.onDeleteEventClick\"> </mwl-calendar-slide-box> </div> </div> ";
+	/***/ },
 /* 20 */
 /***/ function(module, exports) {
 
@@ -275,8 +274,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      vm.viewDate = newDay;
 	    };
 
-	    vm.dateClicked = function(date) {
 
+	    vm.dateClicked = function(date) {
 	      var rawDate = moment(date).toDate();
 
 	      var nextView = {
@@ -395,12 +394,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        onDeleteEventClick: '&',
 	        onTimespanClick: '&',
 	        onDateRangeSelect: '&?',
-	        onViewChangeClick: '&',
+	        onViewChangeClick: '=',
 	        cellModifier: '&',
 	        dayViewStart: '@',
 	        dayViewEnd: '@',
 	        dayViewSplit: '@',
-	        dayViewEventChunkSize: '@'
+	        dayViewEventChunkSize: '@',
+	        dateDisabled:'=',
+	        isSameDate:"=",
 	      },
 	      controller: 'MwlCalendarCtrl as vm',
 	      bindToController: true
