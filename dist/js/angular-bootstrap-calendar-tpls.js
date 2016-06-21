@@ -1739,7 +1739,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          hour: 'ha',
 	          day: 'D MMM',
 	          month: 'MMMM',
-	          weekDay: 'dddd',
+	          weekDay: 'ddd',
 	          time: 'HH:mm',
 	          datetime: 'MMM D, h:mm a'
 	        },
@@ -1868,13 +1868,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    function getWeekDayNames() {
-	      var weekdays = [];
-	      var count = 0;
-	      while (count < 7) {
-	        weekdays.push(formatDate(moment().weekday(count++), calendarConfig.dateFormats.weekDay));
-	      }
-	      return weekdays;
-	    }
+        var weekdays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+        var count = 0;
+        // while (count < 7) {
+        //   weekdays.push(formatDate(moment().weekday(count++), calendarConfig.dateFormats.weekDay));
+        // }
+        return weekdays;
+      }
 
 	    function getYearView(events, viewDate, cellModifier) {
 
